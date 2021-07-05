@@ -8,7 +8,7 @@ import math
 
 # import numpy as np
 
-# Please give us charts of the top 10 and bottom 10 Startup in each of these categories:
+# Please give us charts of the top 10 Startups or Startups sored 10 in each of these categories:
 # User Stickiness
 # Conversion %
 # Profitability
