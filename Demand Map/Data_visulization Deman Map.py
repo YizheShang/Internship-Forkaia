@@ -118,4 +118,8 @@ if __name__ == "__main__":
                 'Veeting', 'VRISING', 'Waterblades', 'webappapp', 'wetlabs', 'Whatyallthink', 'White Compass',
                 'Wincy', 'Wingman', 'WWMD', 'XPR', 'Yogilittle']
 
-    calculate_Business('IDEA LAB DATA - Sheet3.csv', listAB)
+    #calculate_Business('IDEA LAB DATA - Sheet3.csv', listAB)
+    #calculate_Creative('IDEA LAB DATA - Sheet3.csv', listAB)
+    #calculate_Data('IDEA LAB DATA - Sheet3.csv', listAB)
+    #calculate_Developers('IDEA LAB DATA - Sheet3.csv', listAB)
+    #calculate_PM('IDEA LAB DATA - Sheet3.csv', listAB)
