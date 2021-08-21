@@ -1,0 +1,23 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def innovation(reader, headerList):
+    # Make a pie plot for Innovation.
+    Inno_data = reader.groupby(header_list[1]).size().sort_values(ascending=True)
+    Inno_data = Inno_data.sort_index(ascending=False)
+    plt.figure(figsize=(8, 6))
+    plt.pie(Inno_data.values, labels=Inno_data.index, autopct='%.1f%%', explode=[0.8, 0, 0, 0, 0, 0.2, 0.4, 0.6]
+            , textprops={'fontsize': 16})
+    plt.title('Distribution by Innovation(%)', fontsize=20)
+    plt.legend(Inno_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.show()
+
+
+if __name__ == "__main__":
+    # Load the global data.
+    reader = pd.read_csv('SCORECARD 2 (2).csv')
+    header_list = reader.columns.tolist()
+
+    innovation(reader, header_list)
