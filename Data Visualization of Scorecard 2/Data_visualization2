@@ -13,7 +13,28 @@ def innovation(reader, headerList):
     plt.legend(Inno_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
     plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
     plt.show()
-
+    
+    # Make a bar plot for "Innovation."
+    # Get the number of each score.
+    Inno_bar_data = reader['Innovation'].value_counts()
+    Inno_bar_data.plot.bar()
+    plt.xlabel('Scores', fontsize=12)
+    plt.ylabel('Number of Startups', fontsize=12)
+    # Define and make x labels
+    x = np.arange(8)
+    xLabel = [8, 7, 6, 5, 9, 4, 10, 2]
+    plt.xticks(x, labels=xLabel, fontsize=11, rotation='horizontal')
+    # Add the title.
+    plt.title('The Statistics about Startups by Innovation.', fontsize=16)
+    plt.tight_layout()
+    # Redefine the Y-axis scale.
+    y_major_locator = MultipleLocator(10)
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(y_major_locator)
+    # Show numbers on each bar.
+    for i, __ in enumerate(Inno_bar_data.tolist()):
+        plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
+    plt.show()
 
 if __name__ == "__main__":
     # Load the global data.
