@@ -1,10 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import MultipleLocator
+import numpy as np
 
-
-def innovation(reader, headerList):
+def innovation(reader, header_list):
     # Make a pie plot for Innovation.
+    # Sort the data under "Innovation."
     Inno_data = reader.groupby(header_list[1]).size().sort_values(ascending=True)
+    # Sort the index so that legends will be in descending order.
     Inno_data = Inno_data.sort_index(ascending=False)
     plt.figure(figsize=(8, 6))
     plt.pie(Inno_data.values, labels=Inno_data.index, autopct='%.1f%%', explode=[0.8, 0, 0, 0, 0, 0.2, 0.4, 0.6]
@@ -13,7 +16,7 @@ def innovation(reader, headerList):
     plt.legend(Inno_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
     plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
     plt.show()
-    
+
     # Make a bar plot for "Innovation."
     # Get the number of each score.
     Inno_bar_data = reader['Innovation'].value_counts()
@@ -36,9 +39,205 @@ def innovation(reader, headerList):
         plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
     plt.show()
 
+def relevance(reader, header_list):
+    # Make a pie plot for "Relevance to Need of customer."
+    # Sort the data under "Relevance to Need of customer."
+    rele_pie_data = reader.groupby(header_list[2]).size().sort_values(ascending=True)
+    # Sort the index so that legends will be in descending order.
+    rele_pie_data = rele_pie_data.sort_index(ascending=False)
+    plt.figure(figsize=(8, 6))
+    print(len(rele_pie_data.values))
+    plt.pie(rele_pie_data.values, labels=rele_pie_data.index, autopct='%.1f%%', explode=[0, 0, 0, 0, 0, 0.6]
+            , textprops={'fontsize': 16})
+    plt.title('Distribution by Relevance to Need of customer(%)', fontsize=20)
+    plt.legend(rele_pie_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.show()
+
+    # Make a bar plot for "Innovation."
+    # Get the number of each score.
+    rele_bar_data = reader['Relevance to Need of customer'].value_counts()
+    rele_bar_data.plot.bar()
+    plt.xlabel('Scores', fontsize=12)
+    plt.ylabel('Number of Startups', fontsize=12)
+    # Define and make x labels
+    x = np.arange(6)
+    xLabel = [7, 6, 8, 5, 9, 4]
+    plt.xticks(x, labels=xLabel, fontsize=11, rotation='horizontal')
+    # Add the title.
+    plt.title('The Statistics about Startups by Relevance to \nNeed of customer.', fontsize=16)
+    plt.tight_layout()
+    # Redefine the Y-axis scale.
+    y_major_locator = MultipleLocator(10)
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(y_major_locator)
+    # Show numbers on each bar.
+    for i, __ in enumerate(rele_bar_data.tolist()):
+        plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
+    plt.show()
+
+def scope(reader, header_list):
+    # Make a pie plot for "Relevance to Need of customer."
+    # Sort the data under "Relevance to Need of customer."
+    scope_pie_data = reader.groupby(header_list[3]).size().sort_values(ascending=True)
+    # Sort the index so that legends will be in descending order.
+    scope_pie_data = scope_pie_data.sort_index(ascending=False)
+    plt.figure(figsize=(8, 6))
+    plt.pie(scope_pie_data.values, labels=scope_pie_data.index, autopct='%.1f%%', explode=[0, 0, 0, 0, 0, 0.6]
+            , textprops={'fontsize': 16})
+    plt.title('Scope of Investment(%)', fontsize=20)
+    plt.legend(scope_pie_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.show()
+
+    # Make a bar plot for "Innovation."
+    # Get the number of each score.
+    scope_bar_data = reader['Scope of Investment'].value_counts()
+    scope_bar_data.plot.bar()
+    plt.xlabel('Scores', fontsize=12)
+    plt.ylabel('Number of Startups', fontsize=12)
+    # Define and make x labels
+    x = np.arange(6)
+    xLabel = [7, 8, 6, 9, 5, 4]
+    plt.xticks(x, labels=xLabel, fontsize=11, rotation='horizontal')
+    # Add the title.
+    plt.title('The Statistics about Startups by Scope of Investment.', fontsize=16)
+    plt.tight_layout()
+    # Redefine the Y-axis scale.
+    y_major_locator = MultipleLocator(10)
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(y_major_locator)
+    # Show numbers on each bar.
+    for i, __ in enumerate(scope_bar_data.tolist()):
+        plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
+    plt.show()
+
+def profitability(reader, header_list):
+    # Make a pie plot for "Profitability."
+    # Sort the data under "Profitability."
+    profit_pie_data = reader.groupby(header_list[4]).size().sort_values(ascending=True)
+    # Sort the index so that legends will be in descending order.
+    profit_pie_data = profit_pie_data.sort_index(ascending=False)
+    plt.figure(figsize=(8, 6))
+    print(len(profit_pie_data.values))
+    plt.pie(profit_pie_data.values, labels=profit_pie_data.index, autopct='%.1f%%', explode=[0, 0, 0, 0, 0, 0.6]
+            , textprops={'fontsize': 16})
+    plt.title('Profitability(%)', fontsize=20)
+    plt.legend(profit_pie_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.show()
+
+    # Make a bar plot for "Innovation."
+    # Get the number of each score.
+    profit_bar_data = reader['Profitability'].value_counts()
+    profit_bar_data.plot.bar()
+    plt.xlabel('Scores', fontsize=12)
+    plt.ylabel('Number of Startups', fontsize=12)
+    # Define and make x labels
+    x = np.arange(6)
+    xLabel = [7, 8, 6, 5, 9, 4]
+    plt.xticks(x, labels=xLabel, fontsize=11, rotation='horizontal')
+    # Add the title.
+    plt.title('The Statistics about Startups by Profitability.', fontsize=16)
+    plt.tight_layout()
+    # Redefine the Y-axis scale.
+    y_major_locator = MultipleLocator(10)
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(y_major_locator)
+    # Show numbers on each bar.
+    for i, __ in enumerate(profit_bar_data.tolist()):
+        plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
+    plt.show()
+
+def conversion(reader, header_list):
+    # Make a pie plot for "Conversion possibility."
+    # Sort the data under "Conversion possibility."
+    con_pie_data = reader.groupby(header_list[5]).size().sort_values(ascending=True)
+    # Sort the index so that legends will be in descending order.
+    con_pie_data = con_pie_data.sort_index(ascending=False)
+    plt.figure(figsize=(8, 6))
+    #print(len(con_pie_data.values))
+    plt.pie(con_pie_data.values, labels=con_pie_data.index, autopct='%.1f%%', explode=[0, 0, 0, 0, 0.6]
+            , textprops={'fontsize': 16})
+    plt.title('Conversion Possibility(%)', fontsize=20)
+    plt.legend(con_pie_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.show()
+
+    # Make a bar plot for "Innovation."
+    # Get the number of each score.
+    con_bar_data = reader['Conversion Possibility'].value_counts()
+    highest_startups = reader.sort_values(by=header_list[5], ascending=False)
+    highest_startups = highest_startups.loc[highest_startups['Conversion Possibility'] == 8]
+    print(highest_startups)
+    con_bar_data.plot.bar()
+    plt.xlabel('Scores', fontsize=12)
+    plt.ylabel('Number of Startups', fontsize=12)
+    # Define and make x labels
+    x = np.arange(6)
+    xLabel = [7, 6, 8, 5, 4]
+    plt.xticks(x, labels=xLabel, fontsize=11, rotation='horizontal')
+    # Add the title.
+    plt.title('The Statistics about Startups by Conversion Possibility.', fontsize=16)
+    plt.tight_layout()
+    # Redefine the Y-axis scale.
+    y_major_locator = MultipleLocator(10)
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(y_major_locator)
+    # Show numbers on each bar.
+    for i, __ in enumerate(con_bar_data.tolist()):
+        plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
+    plt.show()
+
+def user(reader, header_list):
+    # Make a pie plot for "Conversion possibility."
+    # Sort the data under "Conversion possibility."
+    user_pie_data = reader.groupby(header_list[6]).size().sort_values(ascending=True)
+    # Sort the index so that legends will be in descending order.
+    user_pie_data = user_pie_data.sort_index(ascending=False)
+    plt.figure(figsize=(8, 6))
+    # print(len(con_pie_data.values))
+    plt.pie(user_pie_data.values, labels=user_pie_data.index, autopct='%.1f%%', explode=[0, 0, 0, 0, 0.6]
+            , textprops={'fontsize': 16})
+    plt.title('User Stickness(%)', fontsize=20)
+    plt.legend(user_pie_data.index, bbox_to_anchor=(1.2, 0.8), loc="center right", fontsize=14)
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.show()
+
+    # Make a bar plot for "Innovation."
+    # Get the number of each score.
+    user_bar_data = reader['User Stickness'].value_counts()
+    highest_startups = reader.sort_values(by=header_list[6], ascending=False)
+    highest_startups = highest_startups.loc[highest_startups['User Stickness'] == 8]
+    print(highest_startups[header_list[0]])
+    user_bar_data.plot.bar()
+    plt.xlabel('Scores', fontsize=12)
+    plt.ylabel('Number of Startups', fontsize=12)
+    # Define and make x labels
+    x = np.arange(6)
+    xLabel = [7, 6, 8, 5, 4]
+    plt.xticks(x, labels=xLabel, fontsize=11, rotation='horizontal')
+    # Add the title.
+    plt.title('The Statistics about Startups by User Stickness.', fontsize=16)
+    plt.tight_layout()
+    # Redefine the Y-axis scale.
+    y_major_locator = MultipleLocator(10)
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(y_major_locator)
+    # Show numbers on each bar.
+    for i, __ in enumerate(user_bar_data.tolist()):
+        plt.text(i, __ + 0.05, '%.0f' % __, ha='center', va='bottom', fontsize=12, color='red')
+    plt.show()
+
+
 if __name__ == "__main__":
     # Load the global data.
     reader = pd.read_csv('SCORECARD 2 (2).csv')
     header_list = reader.columns.tolist()
 
-    innovation(reader, header_list)
+    #innovation(reader, header_list)
+    #relevance(reader, header_list)
+    #scope(reader, header_list)
+    #profitability(reader, header_list)
+    #conversion(reader, header_list)
+    #user(reader, header_list)
